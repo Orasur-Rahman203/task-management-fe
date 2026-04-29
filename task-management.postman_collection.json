@@ -1,0 +1,687 @@
+{
+	"info": {
+		"_postman_id": "3c1c50f9-b836-4d2a-94c2-32bed670da5b",
+		"name": "task-management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25344907"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hasan {{$randomAbbreviation}}\",\n    \"email\": \"hasan{{$randomInt}}@example.com\",\n    \"password\": \"password321\",\n    \"role\": \"USER\"         //USER, ADMIN\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/signup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"email\": \"hasan802@example.com\",   //hasan484@example.com  admin\n \"password\": \"password321\",\n \"role\": \"USER\"         //USER, ADMIN\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/signin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refreshToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"refreshToken\":\"155c8c37-cb58-4f6d-98fd-4f53a826c200\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign out",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"refreshToken\":\"99ed3a74-d825-45b0-b5dc-a81b1a04b4d3\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViN2I2NmQ0LWJiOTItNDQwZi04NGE2LTNlOWUwNzZlM2ZkZiIsImlhdCI6MTc3NzExMjM3OCwiZXhwIjoxNzc3MTE1OTc4fQ.QXSVYhaaiBpHrtA3gc_75BIYYpzvQ-C8Iic_Fb4yTa4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer <your_admin_token>"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "placement",
+									"value": "BOOKING",
+									"disabled": true
+								},
+								{
+									"key": "zoneId",
+									"value": "chittagong-zone-456",
+									"disabled": true
+								},
+								{
+									"key": "isActive",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer <your_admin_token>"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/ae5bd495-bb30-425d-a7cd-359de90688c7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"ae5bd495-bb30-425d-a7cd-359de90688c7"
+							],
+							"query": [
+								{
+									"key": "placement",
+									"value": "BOOKING",
+									"disabled": true
+								},
+								{
+									"key": "zoneId",
+									"value": "chittagong-zone-456",
+									"disabled": true
+								},
+								{
+									"key": "isActive",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"AR Rahman Hasan\",\n    \"email\": \"arrahmanhasan@example.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Update user\"\n    // \"email\": \"john.doeupdate@example.com\",\n    // \"password\": \"passwordupdate\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/e4854792-8ba5-432e-a234-4bf6633a7b1f",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"e4854792-8ba5-432e-a234-4bf6633a7b1f"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/90c6b18e-8d96-4ac1-9341-32f6d49bada6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"90c6b18e-8d96-4ac1-9341-32f6d49bada6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMwZDYyYTdlLTEyY2ItNDU5Mi1hN2M4LTRiZmMwMTFmYmU4MSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3NzQ0Njk2NywiZXhwIjoxNzc3NDUwNTY3fQ.G91EVIwF0rnnXh3vMW8k1ALNRAMZVLxK5WJKPICIbQA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "task",
+			"item": [
+				{
+					"name": "tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/0e1ee1fa-13f0-49eb-9809-bd28d83d9c45",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"0e1ee1fa-13f0-49eb-9809-bd28d83d9c45"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create tasks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Contact Page Maintenance Task\",\n    \"description\": \"Tasks related to home and kitchen maintenance\",\n    \"status\": \"OPEN\",\n    \"priority\": \"HIGH\",\n    \"assignId\": \"e4854792-8ba5-432e-a234-4bf6633a7b1f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update task",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"first task\",\n    // \"description\": \"Tasks related to home and kitchen maintenance\",\n    \"status\": \"COMPLETED\"\n    // \"priority\": \"HIGH\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/f9db1e14-caf5-445b-9445-232111f3259c",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"f9db1e14-caf5-445b-9445-232111f3259c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete tasks",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/653a0881-e274-409e-a943-edf88b66d2ca",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"653a0881-e274-409e-a943-edf88b66d2ca"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMwZDYyYTdlLTEyY2ItNDU5Mi1hN2M4LTRiZmMwMTFmYmU4MSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3NzM3MDk5MywiZXhwIjoxNzc3Mzc0NTkzfQ.HffhZ9CPdpe-fUV9G6nCjqcBKDGZ6rgn4lVhMeGHV10",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "audit logs",
+			"item": [
+				{
+					"name": "all logs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/audit-logs?page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"audit-logs"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/5b2c061b-9cb3-40c3-8db6-1a47255cd2fc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"5b2c061b-9cb3-40c3-8db6-1a47255cd2fc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create tasks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Service Page Maintenance Task\",\n    \"description\": \"Tasks related to home and kitchen maintenance\",\n    \"status\": \"OPEN\",\n    \"priority\": \"HIGH\",\n    \"assignId\": \"335d4f37-2f36-4101-993d-0bb087af823b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update task",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"first task\",\n    // \"description\": \"Tasks related to home and kitchen maintenance\",\n    \"status\": \"COMPLETED\"\n    // \"priority\": \"HIGH\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/f9db1e14-caf5-445b-9445-232111f3259c",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"f9db1e14-caf5-445b-9445-232111f3259c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete tasks",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tasks/b1a72699-c91a-44dd-acab-b1d4e7d112d9",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"b1a72699-c91a-44dd-acab-b1d4e7d112d9"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMwZDYyYTdlLTEyY2ItNDU5Mi1hN2M4LTRiZmMwMTFmYmU4MSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3NzQ0Njk2NywiZXhwIjoxNzc3NDUwNTY3fQ.G91EVIwF0rnnXh3vMW8k1ALNRAMZVLxK5WJKPICIbQA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		}
+	]
+}
