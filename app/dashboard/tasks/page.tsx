@@ -14,15 +14,15 @@ export default function TasksPage() {
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { createdTasks = [], assignedTasks = [], isLoading } = useAllTasks({ includeAssigned: true });
+  const { createdTasks = [], assignedTasks = [], isLoading } = useAllTasks();
 
-  const filteredAssignedTasks = assignedTasks.filter((task) => {
+  const filteredAssignedTasks = assignedTasks.filter((task: Task) => {
     if (statusFilter !== "ALL" && task.status !== statusFilter) return false;
     if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
   });
 
-  const filteredCreatedTasks = createdTasks.filter((task) => {
+  const filteredCreatedTasks = createdTasks.filter((task: Task) => {
     if (statusFilter !== "ALL" && task.status !== statusFilter) return false;
     if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
