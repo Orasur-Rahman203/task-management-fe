@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { CheckSquare, Plus, Search } from "lucide-react";
-import { useTasks } from "@/hooks/use-tasks";
+import { useAllTasks } from "@/hooks/use-tasks";
 import { TaskCard } from "@/components/tasks/task-card";
 import { TaskFormDialog } from "@/components/tasks/task-form-dialog";
 import { Button } from "@/components/ui/button";
@@ -14,9 +14,15 @@ export default function TasksPage() {
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: tasks = [], isLoading } = useTasks();
+  const { createdTasks = [], assignedTasks = [], isLoading } = useAllTasks({ includeAssigned: true });
 
-  const filteredTasks = tasks.filter((task) => {
+  const filteredAssignedTasks = assignedTasks.filter((task) => {
+    if (statusFilter !== "ALL" && task.status !== statusFilter) return false;
+    if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+    return true;
+  });
+
+  const filteredCreatedTasks = createdTasks.filter((task) => {
     if (statusFilter !== "ALL" && task.status !== statusFilter) return false;
     if (searchQuery && !task.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
@@ -87,30 +93,61 @@ export default function TasksPage() {
             <div key={i} className="h-32 rounded-xl bg-card border border-border animate-pulse" />
           ))}
         </div>
-      ) : filteredTasks.length === 0 ? (
-        <div className="text-center py-20 border rounded-2xl bg-card" style={{ borderColor: 'var(--border)' }}>
-          <CheckSquare className="w-12 h-12 mx-auto mb-4 opacity-20" />
-          <h3 className="text-lg font-medium mb-1">No tasks found</h3>
-          <p className="text-sm text-muted-foreground">
-            {searchQuery || statusFilter !== "ALL"
-              ? "Try adjusting your search or filters."
-              : "You haven't created any tasks yet."}
-          </p>
-          {(!searchQuery && statusFilter === "ALL") && (
-            <Button
-              variant="outline"
-              className="mt-4 border-border text-foreground hover:bg-secondary"
-              onClick={() => setFormOpen(true)}
-            >
-              Create your first task
-            </Button>
-          )}
-        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {filteredTasks.map((task: Task) => (
-            <TaskCard key={task.id} task={task} />
-          ))}
+        <div className="space-y-10">
+          {/* Assigned to Me Section */}
+          <div>
+            <div className="mb-4">
+              <h2 className="text-lg font-semibold text-foreground">Assigned to Me</h2>
+              <p className="text-sm text-muted-foreground">Tasks assigned by others</p>
+            </div>
+            {filteredAssignedTasks.length === 0 ? (
+              <div className="text-center py-12 border rounded-2xl bg-card" style={{ borderColor: 'var(--border)' }}>
+                <CheckSquare className="w-10 h-10 mx-auto mb-3 opacity-20" />
+                <p className="text-sm text-muted-foreground">No tasks assigned to you</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {filteredAssignedTasks.map((task: Task) => (
+                  <TaskCard key={task.id} task={task} />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Created by Me Section */}
+          <div>
+            <div className="mb-4">
+              <h2 className="text-lg font-semibold text-foreground">Created by Me</h2>
+              <p className="text-sm text-muted-foreground">Tasks you created</p>
+            </div>
+            {filteredCreatedTasks.length === 0 ? (
+              <div className="text-center py-12 border rounded-2xl bg-card" style={{ borderColor: 'var(--border)' }}>
+                <CheckSquare className="w-10 h-10 mx-auto mb-3 opacity-20" />
+                <h3 className="text-sm font-medium mb-1">No tasks created</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {searchQuery || statusFilter !== "ALL"
+                    ? "Try adjusting your search or filters."
+                    : "You haven't created any tasks yet."}
+                </p>
+                {(!searchQuery && statusFilter === "ALL") && (
+                  <Button
+                    variant="outline"
+                    className="border-border text-foreground hover:bg-secondary"
+                    onClick={() => setFormOpen(true)}
+                  >
+                    Create your first task
+                  </Button>
+                )}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {filteredCreatedTasks.map((task: Task) => (
+                  <TaskCard key={task.id} task={task} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
 
